@@ -122,5 +122,10 @@ func ProcessChunk(chunk []byte, linesPool *sync.Pool, stringPool *sync.Pool, sli
 }
 
 func testHandler(text string) {
-	fmt.Println(text)
+	textSlice := strings.Split(text, "|")
+
+	//fmt.Println(textSlice[5])
+	if len(textSlice[5]) == 0 {
+		fmt.Println(text)
+	}
 }
