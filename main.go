@@ -114,7 +114,10 @@ func ProcessChunk(chunk []byte, linesPool *sync.Pool, stringPool *sync.Pool, sli
 			}
 
 			wg2.Done()
+			// 마지막 데이터의 경우 chunkSize 보다 작을 수 있기 때문에 이에 맞춰 종료 값을 설정해준다.
+			// 마지막 인덱스를 초과하여 read 를 실행하면 에러가 발생하기 때문에 이와 같은 설정이 필요하다.
 		}(i*chunkSize, int(math.Min(float64((i+1)*chunkSize), float64(len(documentsSlice)))))
+
 	}
 
 	wg2.Wait()
